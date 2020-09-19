@@ -1,0 +1,31 @@
+.mb-50 {
+    margin-bottom: 50px;
+}
+#maps {
+    padding: 50px;
+}
+
+.gmap{
+    width: 500px;
+    height: 300px;
+}
+
+.bg-image {
+    background: url(https://images.unsplash.com/photo-1553984840-ec965a23cddd?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1489&q=80) !important;
+    background-repeat: no-repeat !important;
+    background-size: cover !important;
+}
+
+.footer {
+    padding: 50px;
+    text-align: center;
+}
+
+.gmap {
+    width: 100%;
+    height: 500px;
+}
+
+.navbar-brand img{
+    width: 70%;
+}

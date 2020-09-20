@@ -36,6 +36,7 @@
 var $htmlBody = $("html,body");
 var $body = $("body");
 var $windowWidth = $(window).width();
+var $modal = $('#myModal');
 
 /*===============================================
   1. Preloaders
@@ -45,7 +46,7 @@ $(window).on("load", function () {
 });
 
 if ($body.attr("data-preloader") === "1") {
-    $body.append($("<div class='preloader preloader-1'><div><svg class='loader-circular' viewBox='25 25 50 50'><circle class='loader-path' cx='50' cy='50' r='20'></svg></div></div>"));
+    $body.append($("<div class='preloader preloader-1'><div><p style='padding-top: 80px;'>Trwa ładowanie...</p><svg class='loader-circular' viewBox='25 25 50 50'><circle class='loader-path' cx='50' cy='50' r='20'></svg></div></div>"));
 } else if ($body.attr("data-preloader") === "2") {
     $body.append($("<div class='preloader preloader-2'><div><span></span></div></div>"));
 } else if ($body.attr("data-preloader") === "3") {
@@ -438,215 +439,6 @@ var $masonryGrid = $(".masonry").imagesLoaded(function () {
     });
 });
 
-
-/*===============================================
-  13. Lightbox
-===============================================*/
-//
-// Lightbox - Image //
-//
-var $lightboxImage = $(".lightbox-image-link, .lightbox-image-box");
-
-$lightboxImage.each(function () {
-    var $this = $(this);
-    $this.magnificPopup({
-        type: 'image',
-        fixedContentPos: false,
-        removalDelay: 200,
-        closeOnContentClick: true,
-        image: {
-            titleSrc: 'data-image-title'
-        }
-    });
-});
-
-//
-// Lightbox - Media //
-//
-var $lightboxMedia = $(".lightbox-media-link, .lightbox-media-box");
-
-$lightboxMedia.each(function () {
-    var $this = $(this);
-    $this.magnificPopup({
-        type: "iframe",
-        fixedContentPos: false,
-        removalDelay: 200,
-        preloader: false,
-        iframe: {
-            patterns: {
-                youtube: {
-                    index: 'youtube.com/',
-                    id: 'v=',
-                    src: '//www.youtube.com/embed/%id%?autoplay=1&rel=0'
-                },
-                vimeo: {
-                    index: 'vimeo.com/',
-                    id: '/',
-                    src: '//player.vimeo.com/video/%id%?autoplay=1'
-                }
-            },
-            srcAction: "iframe_src"
-        }
-    });
-});
-
-//
-// Lightbox - Gallery //
-//
-var $gallery = $(".gallery-wrapper");
-
-if ($gallery.length) {
-    $gallery.each(function () {
-        var $this = $(this);
-        $this.magnificPopup({
-            delegate: 'a',
-            removalDelay: '200',
-            type: 'image',
-            fixedContentPos: false,
-            gallery: {
-                enabled: true
-            },
-            image: {
-                titleSrc: 'data-gallery-title'
-            }
-        });
-    });
-}
-
-
-/*===============================================
-  14. Parallax
-===============================================*/
-if ($windowWidth > 992) {
-    var parallaxBg = $(".parallax");
-
-    if (parallaxBg.length) {
-        parallaxBg.each(function () {
-            $(this).parallaxie({
-                speed: 0.2
-            });
-        });
-    }
-}
-
-
-/*===============================================
-  15. Countdown
-===============================================*/
-//
-// Countdown - Legacy style //
-//
-$(".countdown").each(function () {
-    var finalDate = $(this).attr('data-countdown');
-
-    $(this).countdown(finalDate, function (event) {
-        $(this).html(event.strftime(''
-            + '<div><h2 class="font-weight-light margin-0">%D</h2><h6 class="font-weight-normal font-small uppercase margin-0">Days</h6></div>'
-            + '<div><h2 class="font-weight-light margin-0">%H</h2><h6 class="font-weight-normal font-small uppercase margin-0">Hours</h6></div>'
-            + '<div><h2 class="font-weight-light margin-0">%M</h2><h6 class="font-weight-normal font-small uppercase margin-0">Minutes</h6></div>'
-            + '<div><h2 class="font-weight-light margin-0">%S</h2><h6 class="font-weight-normal font-small uppercase margin-0">Seconds</h6></div>'));
-    });
-});
-
-//
-// Countdown - Basic style //
-//
-$(".countdown-basic").each(function () {
-    var finalDate = $(this).attr('data-countdown');
-
-    $(this).countdown(finalDate, function (event) {
-        $(this).html(event.strftime('%D days %H:%M:%S'));
-    });
-});
-
-
-/*===============================================
-  16. Counter
-===============================================*/
-$(".counter").appear(function () {
-
-    $(this).each(function () {
-        $(this).prop("Counter", 0).animate({
-            Counter: $(this).text()
-        }, {
-            duration: 3000,
-            easing: "swing",
-            step: function (now) {
-                $(this).text(Math.ceil(now));
-            }
-        });
-    });
-
-}, {accX: 0, accY: -10});
-
-
-/*===============================================
-  17. Accordion
-===============================================*/
-$(".accordion-title").each(function () {
-
-    var $this = $(this);
-
-    $this.on("click", function () {
-        var accordionList = $this.parent("li");
-        var accordionContent = this.nextElementSibling;
-
-        if (accordionList.hasClass("active")) {
-            accordionList.removeClass("active");
-            accordionContent.style.maxHeight = null;
-        } else {
-            accordionList.addClass("active");
-            if ($this.closest(".accordion").hasClass("single-open")) {
-                $this.closest(".accordion").children("li").removeClass("active");
-                accordionList.addClass("active");
-                $this.parents(".single-open").find(".accordion-content").css("max-height", "0");
-            }
-            accordionContent.style.maxHeight = accordionContent.scrollHeight + "px";
-        }
-    });
-
-    //
-    // Give max-height to Accordion's active content //
-    //
-    if ($this.parents(".accordion").find("li").hasClass("active")) {
-        var accordionActiveContent = $this.parents(".accordion").find("li.active").children(".accordion-content");
-        var accordionHeight = accordionActiveContent.prop("scrollHeight");
-
-        accordionActiveContent.css({'max-height': accordionHeight + "px"});
-    }
-
-});
-
-
-/*===============================================
-  18. Popover
-===============================================*/
-$('[data-toggle="popover"]').popover();
-
-
-/*===============================================
-  19. Tooltip
-===============================================*/
-$('[data-toggle="tooltip"]').tooltip();
-
-
-/*===============================================
-  20. Easy Pie Chart
-===============================================*/
-$(".pie-chart").appear(function () {
-
-    $(this).each(function () {
-        $(this).easyPieChart({
-            lineCap: 'square',
-            onStep: function (from, to, percent) {
-                $(this.el).find('.percent').text(Math.round(percent));
-            }
-        });
-    });
-
-}, {accX: 0, accY: -10});
-
-
 /*===============================================
   21. Google Maps
 ===============================================*/
@@ -692,20 +484,27 @@ if (mapCanvas.length) {
                     lng: long,
                 },
                 success: function (response) {
-                    console.log('success');
                     $body.addClass('loaded');
+                    $modal.modal();
+                    console.log(response)
+                    $('#wind_speed').html(response['weather']['wind']['speed']);
+                    $('#temp').html(k_to_c(response['weather']['main']['temp']));
+                    $('#cloudy').html(response['weather']['weather'][0]['main']);
+                    $('#description').html(response['weather']['weather'][0]['description']);
+                    $('#city').html(response['weather']['name']);
+                    $('#lat').html(response['weather']['coord']['lat']);
+                    $('#lng').html(response['weather']['coord']['lon']);
                 },
                 error: function (response) {
-                    console.log('error')
                 }
             });
 
         });
 
-        map.addMarker({
-            lat: initLatitude,
-            lng: initLongitude
-        });
+        function k_to_c($temp)
+        {
+            return Math.round(($temp - 273.15));
+        }
     }
 }
 

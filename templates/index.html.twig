@@ -53,6 +53,94 @@
     <div class="scrolltotop">
         <a class="button-circle button-circle-sm button-circle-dark" href="#"><i class="ti-arrow-up"></i></a>
     </div>
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+
+            <div class="modal-content">
+                <div class="modal-header" style="">
+                    <h4> Aktualna pogoda </h4>
+                </div>
+                <div class="modal-body" style="padding:40px 50px;">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card" style="">
+                                <img class="card-img-top"
+                                     src="https://images.unsplash.com/photo-1444962668425-360f59fa2c24?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1267&q=80"
+                                     alt="wiatr">
+                                <div class="card-body">
+                                    <h5 class="card-title">Wiatr</h5>
+                                    <p class="card-text"><span id="wind_speed"></span> km/h</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card" style="">
+                                <img class="card-img-top"
+                                     src="https://images.unsplash.com/photo-1580917922805-f8f57e08c0ae?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                                     alt="temperatura">
+                                <div class="card-body">
+                                    <h5 class="card-title">Temperatura</h5>
+                                    <p class="card-text"><span id="temp"></span> °C</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card" style="">
+                                <img class="card-img-top"
+                                     src="https://images.unsplash.com/photo-1593791169307-613ea8a324b7?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                                     alt="zachmurzenie">
+                                <div class="card-body">
+                                    <h5 class="card-title">Zachmurzenie</h5>
+                                    <p class="card-text"><span id="cloudy"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card" style="">
+                                <img class="card-img-top"
+                                     src="https://images.unsplash.com/photo-1561583534-09e822ba83ba?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1912&q=80"
+                                     alt="opis">
+                                <div class="card-body">
+                                    <h5 class="card-title">Opis</h5>
+                                    <p class="card-text"><span id="description"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card" style="">
+                                <img class="card-img-top"
+                                     src="https://images.unsplash.com/photo-1477959858617-67f85cf4f1df?ixlib=rb-1.2.1&auto=format&fit=crop&w=1413&q=80"
+                                     alt="miasto">
+                                <div class="card-body">
+                                    <h5 class="card-title">Miasto</h5>
+                                    <p class="card-text"><span id="city"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card" style="">
+                                <img class="card-img-top"
+                                     src="https://images.unsplash.com/photo-1478860409698-8707f313ee8b?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1350&q=80"
+                                     alt="współrzędne">
+                                <div class="card-body">
+                                    <h5 class="card-title">Współrzędne </h5>
+                                    <p class="card-text">lat: <span id="lat"></span> long: <span id="lng"></span></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-danger btn-default pull-left" data-dismiss="modal"><span
+                                class="glyphicon glyphicon-remove"></span> Zamknij
+                    </button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 {% endblock %}
 
 {% block javascripts %}

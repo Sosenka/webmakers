@@ -36,7 +36,7 @@ class ApiController extends AbstractController
 
     /**
      * @param Request $request
-     * @return JsonResponse
+     * @return JsonResponse|Response
      * @throws TransportExceptionInterface
      * @throws ClientExceptionInterface
      * @throws DecodingExceptionInterface
@@ -46,7 +46,6 @@ class ApiController extends AbstractController
      */
     public function getAction(Request $request)
     {
-        $data = $request->request->all();
         $response = $this->client->request('GET', 'https://api.openweathermap.org/data/2.5/weather?lat=&lon=&appid=', [
             'query' => [
                 'lat' => $request->request->get('lat'),
@@ -56,17 +55,23 @@ class ApiController extends AbstractController
         ]);
         $response = $response->toArray();
 
-         if($this->saveWeather($response)){
-             return new JsonResponse(['status' => 'success', 'message' => 'Pogoda została zapisana'], 200);
-         } else {
-             return new JsonResponse(['status' => 'error', 'message' => 'Coś poszło nie tak!'], 500);
-         }
+        if ($this->saveWeather($response)) {
+            dump($response);
+
+            return new JsonResponse([
+                'status' => 'success',
+                'message' => 'Pomyślnie dodano pogode',
+                'weather' => $response
+            ]);
+        } else {
+            return new JsonResponse(['status' => 'error', 'message' => 'Coś poszło nie tak!'], 500);
+        }
     }
 
     public function saveWeather($response)
     {
 
-        if ($response !== null){
+        if ($response !== null) {
             $weather = new Weather();
 
             $temp = $this->k_to_c($response['main']['temp']);
@@ -82,13 +87,16 @@ class ApiController extends AbstractController
             $this->em->flush();
 
             return true;
-        }else {
+        } else {
             return false;
         }
     }
 
-    private function k_to_c($temp) {
-        if ( !is_numeric($temp) ) { return false; }
+    private function k_to_c($temp)
+    {
+        if (!is_numeric($temp)) {
+            return false;
+        }
         return round(($temp - 273.15));
     }
 }

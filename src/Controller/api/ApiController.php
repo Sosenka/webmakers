@@ -46,7 +46,7 @@ class ApiController extends AbstractController
 
     public function saveWeather($response)
     {
-        $this->k_to_c($response['temp']);
+//        $this->k_to_c($response['temp']);
     }
 
     private function k_to_c($temp) {

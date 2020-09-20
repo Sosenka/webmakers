@@ -674,6 +674,8 @@ if (mapCanvas.length) {
         });
 
         map.addListener("click", (e) => {
+            $body.removeClass('loaded');
+
             let coordinates = e.latLng.toString();
             let lat = coordinates.split(",")[0];
             let long = coordinates.split(",")[1];
@@ -690,7 +692,8 @@ if (mapCanvas.length) {
                     lng: long,
                 },
                 success: function (response) {
-                    console.log('success')
+                    console.log('success');
+                    $body.addClass('loaded');
                 },
                 error: function (response) {
                     console.log('error')

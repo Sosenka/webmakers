@@ -29,3 +29,7 @@
 .navbar-brand img{
     width: 70%;
 }
+
+.preloader{
+    display: block;
+}
